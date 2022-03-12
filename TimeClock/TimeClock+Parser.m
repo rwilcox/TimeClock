@@ -91,7 +91,11 @@
     }
     else {
         // Clocking out
+        NSRange range = NSMakeRange(3,[line count] - 3);
+        NSString* comment = [[line subarrayWithRange:range] componentsJoinedByString:@" "];
+        
         lastEntry.endDate = date;
+        lastEntry.comment = comment;
         return lastEntry;
     }	
 }
