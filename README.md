@@ -9,11 +9,13 @@ in an internal CoreData storage. This storage is then bound to the user interfac
 The `.timeclock` file (and internal storage) is organized into *projects* and *work items*.
 The entries (for clocking in should be formatted as follows:
 
-    i yyyy/mm/dd hh:mm:ss [project] work item
-    o yyyy/mm/dd hh:mm:ss
+    i yyyy/mm/dd hh:mm:ss [project]
+    o yyyy/mm/dd hh:mm:ss description or reason for clocking out
     
-The entries for clocking out do not have to have any associated description. Only the timestamp
+The entries for clocking out do not _have to_ have any associated description. Only the timestamp
 for clocking out is analyzed.
+
+See [Emacs timeclock.el documentation](https://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/calendar/timeclock.el?h=emacs-28#n328)
 
 # User Interface
 
