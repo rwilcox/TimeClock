@@ -39,8 +39,18 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     NSError *error = nil;
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults registerDefaults:
+     @{@"timeclockFilePath": @"~/.timelog"}
+    ];
+    
     [self.timeClock clearAll];
-    [self.timeClock readFromDefaultError:&error];
+    
+    [self.timeClock
+        readFromURL:[NSURL fileURLWithPath: [[defaults stringForKey:@"timeclockFilePath"] stringByExpandingTildeInPath]]
+        error:&error];
+    
     if(error != nil) {
         NSLog(@"%@", [error localizedDescription]);
         [[NSApplication sharedApplication] presentError:error];
