@@ -61,6 +61,29 @@
     return output;
 }
 
+- (NSMutableString*) exportProject:(Project *) project asCSVtoMutableString:(NSMutableString*)output
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+
+    NSString *entryFormatString = NSLocalizedString(@"\"%@\",%@,\"%@\"\n", @"CSV format");
+    [output appendFormat:entryFormatString, @"Date", @"Hours", @"Description"];
+
+    [[project timesSummarizedByDate] enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
+        SummarizedEntry* cur = (SummarizedEntry*)obj;
+
+        [output appendFormat:entryFormatString,
+         [dateFormatter stringFromDate:cur.date],
+         [numberFormatter stringFromNumber:[NSNumber numberWithDouble:cur.hours]],
+         cur.label];
+    }];
+    
+    return output;
+}
+
 - (NSMutableString*) printProject:(Project*)project toMutableString:(NSMutableString*)output
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -99,4 +122,6 @@
 	
 	return ok;
 }
+
+
 @end

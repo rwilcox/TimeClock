@@ -31,4 +31,5 @@
 - (NSMutableString *)printProjectWithName:(NSString *)name toMutableString:(NSMutableString *)mutableString;
 - (BOOL)printProjectWithName:(NSString *)name toURL:(NSURL *)url error:(NSError **)error;
 
+- (NSMutableString*) exportProject:(Project *) project asCSVtoMutableString:(NSMutableString*)output;
 @end

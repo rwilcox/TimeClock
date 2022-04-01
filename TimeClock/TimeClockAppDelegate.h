@@ -37,6 +37,7 @@
 
 - (IBAction)saveAction:(id)sender;
 - (IBAction)printAction:(id)sender;
+- (IBAction)exportAction:(id)sender;
 
 
 @end

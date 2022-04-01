@@ -262,6 +262,22 @@
     [printOperation runOperationModalForWindow:self.window delegate:self didRunSelector:@selector(printOperationDidRun:success:contextInfo:) contextInfo:nil];
 }
 
+- (IBAction)exportAction:(id)sender {
+    NSMutableString *string = [[NSMutableString alloc] init];
+
+    for (Project *project in projectsArrayController.selectedObjects) {
+        [self.timeClock exportProject: project asCSVtoMutableString:string];
+    }
+    
+    NSSavePanel *savePanel = [NSSavePanel savePanel];
+        [savePanel setRequiredFileType:@"csv"];
+        [savePanel setTitle:@"Export"];
+        if ([savePanel runModal] == NSOKButton)
+        {
+            [string writeToURL:[savePanel URL] atomically:YES ];
+        }
+    //NSLog(string);
+}
 
 
 @end
