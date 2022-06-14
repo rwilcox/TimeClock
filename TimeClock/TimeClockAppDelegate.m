@@ -276,7 +276,7 @@
     NSSavePanel *savePanel = [NSSavePanel savePanel];
         [savePanel setRequiredFileType:@"csv"];
         [savePanel setTitle:@"Export"];
-        if ([savePanel runModal] == NSOKButton)
+    if ([savePanel runModal] == NSModalResponseOK)
         {
             [string writeToURL:[savePanel URL] atomically:YES ];
         }
@@ -294,7 +294,7 @@
     TimeClockAppDelegate* weakSelf = self;
     
     [panel beginWithCompletionHandler:^(NSInteger result){
-       if (result == NSFileHandlingPanelOKButton) {
+        if (result == NSModalResponseOK) {
           NSURL*  theDoc = [[panel URLs] objectAtIndex:0];
            
            [weakSelf parseFile: theDoc];
