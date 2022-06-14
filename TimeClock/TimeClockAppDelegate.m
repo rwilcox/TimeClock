@@ -38,18 +38,23 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSError *error = nil;
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults registerDefaults:
-     @{@"timeclockFilePath": @"~/.timelog"}
+     //@{@"timeclockFilePath": @"~/.timelog"}
+     @{@"timeclockFilePath": @"/Volumes/Leviathan/Documents/timelog"}
+
     ];
+    
+    [self parseFile:[NSURL fileURLWithPath: [[defaults stringForKey:@"timeclockFilePath"] stringByExpandingTildeInPath]]];
+}
+
+- (void) parseFile: (NSURL*) file {
+    NSError *error = nil;
     
     [self.timeClock clearAll];
     
-    [self.timeClock
-        readFromURL:[NSURL fileURLWithPath: [[defaults stringForKey:@"timeclockFilePath"] stringByExpandingTildeInPath]]
-        error:&error];
+    [self.timeClock readFromURL: file error:&error];
     
     if(error != nil) {
         NSLog(@"%@", [error localizedDescription]);
@@ -59,7 +64,6 @@
     for (Project *project in [self.timeClock projects]) {
         NSLog(@"%@", project);
     }
-    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
@@ -279,5 +283,24 @@
     //NSLog(string);
 }
 
+- (IBAction) onOpenDocument:(id) sender {
+    NSOpenPanel* panel = [NSOpenPanel openPanel];
 
+
+    // This method displays the panel and returns immediately.
+    // The completion handler is called when the user selects an
+    // item or cancels the panel.
+
+    TimeClockAppDelegate* weakSelf = self;
+    
+    [panel beginWithCompletionHandler:^(NSInteger result){
+       if (result == NSFileHandlingPanelOKButton) {
+          NSURL*  theDoc = [[panel URLs] objectAtIndex:0];
+           
+           [weakSelf parseFile: theDoc];
+          // Open  the document.
+       }
+    }];
+    
+}
 @end
