@@ -51,7 +51,7 @@
 
 - (NSString*) description
 {
-	return [NSString stringWithFormat:@"%@: total=%@ hours, %lu entries, %@ (%@ - %@)", self.name, [self valueForKeyPath:@"entries.@sum.duration"], (unsigned long)[self.entries count], [self timesSummarizedByDate], [self valueForKeyPath:@"entries.@min.start"], [self valueForKeyPath:@"entries.@max.end"]];
+	return [NSString stringWithFormat:@"%@: total=%@ hours, %lu entries, %@ (%@ - %@)", self.name, [self valueForKeyPath:@"entries.@sum.duration"], (unsigned long)[self.entries count], [self timesSummarizedByDate], [self valueForKeyPath:@"entries.@min.startDate"], [self valueForKeyPath:@"entries.@max.endDate"]];
 }
 
 
