@@ -54,6 +54,9 @@
 	return [NSString stringWithFormat:@"%@: total=%@ hours, %lu entries, %@ (%@ - %@)", self.name, [self valueForKeyPath:@"entries.@sum.duration"], (unsigned long)[self.entries count], [self timesSummarizedByDate], [self valueForKeyPath:@"entries.@min.startDate"], [self valueForKeyPath:@"entries.@max.endDate"]];
 }
 
+- (NSMutableArray*) weeklySummaries {
+    return [[NSMutableArray alloc] initWithCapacity:1];
+}
 
 @end
 
