@@ -91,19 +91,8 @@
     return _managedObjectModel;
 }
 
-// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (_persistentStoreCoordinator) {
-        return _persistentStoreCoordinator;
-    }
-    
-    NSManagedObjectModel *mom = [self managedObjectModel];
-    if (!mom) {
-        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
-        return nil;
-    }
-    
+
+- (NSURL*) pathToStoredDatabase {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
     NSError *error = nil;
@@ -133,7 +122,26 @@
         }
     }
     
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"TimeClock.storedata"];
+    return [applicationFilesDirectory URLByAppendingPathComponent:@"TimeClock.storedata"];
+}
+
+
+// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    NSError *error = nil;
+
+    if (_persistentStoreCoordinator) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSManagedObjectModel *mom = [self managedObjectModel];
+    if (!mom) {
+        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
+        return nil;
+    }
+    
+    NSURL* url = [self pathToStoredDatabase];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
@@ -188,19 +196,34 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-    // Save changes in the application's managed object context before the application terminates.
+    // since the coredata database is not the source of record for this work - the emacs file is - delete the store without saving data
+    // as this app will just recreate it next run
+    //
+    // and this avoids some odd validation error I can't seem to find. RPW 11-08-2022
+    
+    NSURL* databasePath = [self pathToStoredDatabase];
+    NSError* error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    [fileManager removeItemAtURL: databasePath error:&error];
+    return NSTerminateNow;
+}
+
+
+- (BOOL) doDatabaseSave: (NSApplication*) sender {
+    //Save changes in the application's managed object context (used to be before a database save
     
     if (!_managedObjectContext) {
-        return NSTerminateNow;
+        return true;
     }
     
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
-        return NSTerminateCancel;
+        return false;
     }
     
     if (![[self managedObjectContext] hasChanges]) {
-        return NSTerminateNow;
+        return true;
     }
     
     NSError *error = nil;
@@ -210,7 +233,7 @@
         NSLog(@"%@", error.userInfo);
         BOOL result = [sender presentError:error];
         if (result) {
-            return NSTerminateCancel;
+            return false;
         }
 
         NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
@@ -226,11 +249,11 @@
         NSInteger answer = [alert runModal];
         
         if (answer == NSAlertFirstButtonReturn) {
-            return NSTerminateCancel;
+            return false;
         }
     }
 
-    return NSTerminateNow;
+    return true;
 }
 
 - (TimeClock *)timeClock
