@@ -932,20 +932,20 @@
                                             <rect key="frame" x="10" y="33" width="633" height="165"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView ambiguous="YES" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oW-ss-AQC">
-                                                    <rect key="frame" x="0.0" y="38" width="633" height="135"/>
-                                                    <clipView key="contentView" ambiguous="YES" id="bi8-oq-efk">
-                                                        <rect key="frame" x="1" y="1" width="631" height="133"/>
+                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oW-ss-AQC">
+                                                    <rect key="frame" x="0.0" y="38" width="633" height="160"/>
+                                                    <clipView key="contentView" id="bi8-oq-efk">
+                                                        <rect key="frame" x="1" y="1" width="631" height="158"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="MLy-Mc-8lz" viewBased="YES" id="5iQ-dm-qYg">
-                                                                <rect key="frame" x="0.0" y="0.0" width="631" height="105"/>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="MLy-Mc-8lz" viewBased="YES" id="5iQ-dm-qYg">
+                                                                <rect key="frame" x="0.0" y="0.0" width="631" height="130"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="17" height="0.0"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn identifier="AutomaticTableColumnIdentifier.0" width="116" minWidth="40" maxWidth="1000" id="ccd-4S-VvZ">
+                                                                    <tableColumn identifier="AutomaticTableColumnIdentifier.0" editable="NO" width="116" minWidth="40" maxWidth="1000" id="ccd-4S-VvZ">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Week Starting">
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -956,25 +956,15 @@
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                                        <prototypeCellViews>
-                                                                            <tableCellView id="Kbw-jN-UaD">
-                                                                                <rect key="frame" x="8" y="0.0" width="114" height="24"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                                <subviews>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKf-Eq-nsY">
-                                                                                        <rect key="frame" x="0.0" y="4" width="114" height="16"/>
-                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="WsG-mN-TJj">
-                                                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                                        </textFieldCell>
-                                                                                    </textField>
-                                                                                </subviews>
-                                                                            </tableCellView>
-                                                                        </prototypeCellViews>
+                                                                        <connections>
+                                                                            <binding destination="Ed1-pm-k0J" name="value" keyPath="arrangedObjects.weekStartName" id="ark-dA-DvW">
+                                                                                <dictionary key="options">
+                                                                                    <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
                                                                     </tableColumn>
-                                                                    <tableColumn identifier="AutomaticTableColumnIdentifier.1" width="486" minWidth="40" maxWidth="1000" id="r45-3A-CQr">
+                                                                    <tableColumn identifier="AutomaticTableColumnIdentifier.1" editable="NO" width="486" minWidth="40" maxWidth="1000" id="r45-3A-CQr">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Hours">
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -985,23 +975,13 @@
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                                        <prototypeCellViews>
-                                                                            <tableCellView id="YsC-8H-cKV">
-                                                                                <rect key="frame" x="139" y="0.0" width="483" height="24"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                                <subviews>
-                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YWZ-Ll-QnI">
-                                                                                        <rect key="frame" x="0.0" y="4" width="483" height="16"/>
-                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="bjo-m0-AaX">
-                                                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                                        </textFieldCell>
-                                                                                    </textField>
-                                                                                </subviews>
-                                                                            </tableCellView>
-                                                                        </prototypeCellViews>
+                                                                        <connections>
+                                                                            <binding destination="Ed1-pm-k0J" name="value" keyPath="arrangedObjects.sumHoursForWeek" id="Fac-ZS-RuO">
+                                                                                <dictionary key="options">
+                                                                                    <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
                                                                     </tableColumn>
                                                                 </tableColumns>
                                                                 <connections>
@@ -1026,7 +1006,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="5oW-ss-AQC" firstAttribute="leading" secondItem="eif-ra-mZE" secondAttribute="leading" id="FpY-ZC-E4X"/>
+                                                <constraint firstItem="5oW-ss-AQC" firstAttribute="top" secondItem="eif-ra-mZE" secondAttribute="top" constant="-8" id="psG-lL-ovm"/>
                                                 <constraint firstAttribute="trailing" secondItem="5oW-ss-AQC" secondAttribute="trailing" id="qML-31-eAR"/>
+                                                <constraint firstAttribute="bottom" secondItem="5oW-ss-AQC" secondAttribute="bottom" constant="38" id="waC-ln-GS1"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>
@@ -1112,7 +1094,8 @@
         <arrayController objectClassName="NSMutableArray" id="Ed1-pm-k0J" userLabel="WeeklySummary Array Controller">
             <classReference key="objectClass" className="NSMutableArray"/>
             <connections>
-                <binding destination="577" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfArrays.weeklySummaries" id="4bq-0t-3RX"/>
+                <binding destination="577" name="contentArray" keyPath="selection.weeklySummaries" id="FQn-Ty-gvs"/>
+                <binding destination="577" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfArrays.weeklySummaries" previousBinding="FQn-Ty-gvs" id="6n9-Cm-ToA"/>
             </connections>
         </arrayController>
     </objects>

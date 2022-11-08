@@ -53,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		08827E632918A1CC001DFEAE /* WeekSummaryInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeekSummaryInfo.m; sourceTree = "<group>"; };
+		08827E652919F217001DFEAE /* WeekSummaryInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeekSummaryInfo.h; sourceTree = "<group>"; };
 		301F0DB9172CF8DA00690F00 /* TimeClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeClock.h; path = Model/TimeClock.h; sourceTree = "<group>"; };
 		301F0DBA172CF8DA00690F00 /* TimeClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeClock.m; path = Model/TimeClock.m; sourceTree = "<group>"; };
 		301F0DBE172CFC5800690F00 /* TimeClock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeClock.xcdatamodel; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 				301F0DC8172D000900690F00 /* Entry.m */,
 				304716001727EF1200FBC523 /* Entry+Extended.h */,
 				08827E632918A1CC001DFEAE /* WeekSummaryInfo.m */,
+				08827E652919F217001DFEAE /* WeekSummaryInfo.h */,
 				304716011727EF1200FBC523 /* Entry+Extended.m */,
 				304716021727EF1200FBC523 /* Project+Extended.h */,
 				304716031727EF1200FBC523 /* Project+Extended.m */,
